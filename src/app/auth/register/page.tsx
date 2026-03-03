@@ -92,7 +92,6 @@ export default function RegisterPage() {
                             id="name"
                             type="text"
                             value={name}
-                            className="text-white"
                             placeholder="Nhập tên của bạn"
                             onChange={(e) => {
                                 setName(e.target.value);
@@ -106,7 +105,6 @@ export default function RegisterPage() {
                             id="email"
                             type="email"
                             value={email}
-                            className="text-white"
                             placeholder="Nhập tài khoản của bạn"
                             error={fieldErrors.email}
                             onChange={(e) => {
@@ -120,7 +118,6 @@ export default function RegisterPage() {
                             label="Mật Khẩu"
                             id="password"
                             type="password"
-                            className="text-white"
                             placeholder="Nhập mật khẩu của bạn"
                             value={password}
                             error={fieldErrors.password}
