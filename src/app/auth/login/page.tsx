@@ -72,7 +72,6 @@ export default function LoginPage() {
                             label="Tài Khoản Email"
                             id="email"
                             type="email"
-                            className="text-white"
                             value={email}
                             placeholder="Nhập tài khoản của bạn"
                             onChange={(e) => {
@@ -85,7 +84,6 @@ export default function LoginPage() {
                             label="Mật Khẩu"
                             id="password"
                             type="password"
-                            className="text-white"
                             value={password}
                             placeholder="Nhập mật khẩu của bạn"
                             onChange={(e) => {

@@ -1,36 +1,89 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+#Project Name 
+Dự án quản lý sản phẩm 
+Fullstack Product Management System tạo ra bằng Next.js App Router.
+Cho phép người dùng đăng nhập , đăng ký, đăng xuất và quản lý cũng như thao tác với sản phẩm 
+## Demo
+https:/productmanager1-rfyce9rzr-krappykings-projects.vercel.app/
+##Tech Stack
+-Next.js ( 16 ) App Router
+-TypeScript
+-MongoDB
+-TailwindCSS
+-ReactComponent
+-Jwt Authentication
 
-First, run the development server:
+##Features
+- User Register, Login, Logout
+-Protected DashBoard
+-JWT Authentication
+-API route with Next.js
+-MONGODB Database Integration
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+##Install dependencies: 
+-git clone : https://github.com/Kippy198/ProductManager 
+- cd productmanager
+-npm install
+-create a `.env.local` file : 
+    MONGODB_URI=your_mongodb_connection_string
+    JWT_SECRET=your_secret_key
 
+##Run Locally
+-npm run dev
+##Project Structure
+/src
+    /app
+        /api
+            /dashboard
+            /login
+            /logout
+            /products
+            /register
+            /seed
+            /user
+        /auth
+            /login
+                /page.tsx
+            /register
+                /page.tsx
+        /dashboard
+            /dashboard
+                /page.tsx
+            /products
+                /[id]
+                    /page.tsx
+                /modal
+                    /page.tsx
+            /layout.tsx
+            /page.tsx
+            /provider ( Toast )
+    /component
+        /layout
+            /Header
+            /Sidebar
+        /ui     
+            /button.tsx
+            /card.tsx
+            /input.tsx
+    /lib
+        /auth.ts
+        /mongodb.ts
+        /useToast.ts
+    /models 
+        /Product.ts
+        /user.ts
+    /service
+        /productservice.ts
+    type 
+        /api
+        /auth
+        /products
+        /user      
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+##Author
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Đỗ Thành Đạt
+Github: https://github.com/Kippy198
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
