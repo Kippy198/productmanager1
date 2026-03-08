@@ -1,10 +1,9 @@
 
 # Product Management System
-Dự án quản lý sản phẩm 
-Fullstack Product Management System tạo ra bằng Next.js App Router.
-Cho phép người dùng đăng nhập , đăng ký, đăng xuất và quản lý cũng như thao tác với sản phẩm 
+- Fullstack Product Management System tạo ra bằng Next.js App Router.
+- Cho phép người dùng đăng nhập , đăng ký, đăng xuất và quản lý cũng như thao tác với sản phẩm 
 ## Demo
--Live URL: https:/productmanager1-rfyce9rzr-krappykings-projects.vercel.app/
+-Live URL: https://productmanager1-rfyce9rzr-krappykings-projects.vercel.app/
 - Demo Credentials:
   - Email: admin@bestcustom.co
   - Password: Admin@123

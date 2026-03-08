@@ -1,7 +1,6 @@
-import { LoginType } from "../type/auth";
+import { LoginType, RegisterType  } from "../type/auth";
 import { ApiResponse } from "../type/api";
 import { UserType } from "../type/user";
-import { RegisterType } from "../type/auth";
 
 export async function login(data: LoginType): Promise<UserType> {
   const res = await fetch("/api/login", {

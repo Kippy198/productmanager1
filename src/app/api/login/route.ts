@@ -1,6 +1,6 @@
+import { UserModel } from './../../../models/User';
 import { NextResponse } from "next/server";
 import { connectDB } from "@/src/lib/mongodb";
-import User from '@/src/models/User';
 import bcrypt from "bcrypt";
 import  jwt  from "jsonwebtoken";
 
@@ -15,7 +15,7 @@ export async function POST( request: Request) {
             {status: 400}
         );
 
-    const user = await User.findOne({email});
+    const user = await UserModel.findOne({email});
     if(!user) {
         return NextResponse.json(
             {message: "Khong tim thay nguoi dung"},
@@ -52,6 +52,7 @@ export async function POST( request: Request) {
         process.env.JWT_SECRET!,
         {expiresIn: "1d"}
     )
+    
     const response = NextResponse.json({message: "Dang nhap thanh cong"});
     response.cookies.set("token", token, {
         httpOnly: true,

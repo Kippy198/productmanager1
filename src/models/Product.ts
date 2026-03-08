@@ -1,19 +1,9 @@
 import mongoose from "mongoose";
 import { ProductType } from "../type/product";
 
-export interface ProductDocument extends Document {
-  name: string;
-  description: string;
-  category: "T-Shirt" | "Mug" | "Hoodie" | "Phone Case";
-  price: number;
-  stockQuantity: number;
-  imageUrl: string;
-  status: "active" | "inactive";
-  createdAt: Date;
-  updatedAt: Date;
-}
+export interface ProductDocument extends ProductType,Document {}
 
-const ProductSchema = new mongoose.Schema (
+const ProductSchema = new mongoose.Schema<ProductDocument> (
     {
         name: {
             type: String, 
@@ -43,7 +33,7 @@ const ProductSchema = new mongoose.Schema (
         },
         status : {
             type: String,
-            enum: ["active", "inactive"]
+            enum: ["active", "inactive"],
         }
     },
     {
@@ -53,4 +43,5 @@ const ProductSchema = new mongoose.Schema (
 
 ProductSchema.index({name: "text"});
 
-export default mongoose.models.Product || mongoose.model<ProductDocument>("Product", ProductSchema);
+export default  mongoose.models.Product|| 
+                mongoose.model<ProductDocument>("Product", ProductSchema);

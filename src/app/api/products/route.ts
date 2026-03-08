@@ -2,31 +2,26 @@ import { NextResponse, NextRequest } from "next/server";
 import { connectDB } from "@/src/lib/mongodb";
 import { PaginationProduct } from "@/src/service/product.service";
 import Product from "@/src/models/Product";
+import { ProductType, TotalQuery } from "@/src/type/product";
+
 
 export async function GET(req: NextRequest) {
     try {
-        await connectDB();
+        await connectDB()
         const {searchParams} = new URL(req.url);
+        const query: Partial<TotalQuery> = {};
 
-        const query: any = {};
-        
         const search = searchParams.get("search");
-        if (search) query.search = search;
+        if(search) query.search = search;
         
         const category = searchParams.get("category");
-        if (category) query.category = category;
-        
-        const minPrice = searchParams.get("minPrice");
-        if (minPrice) query.minPrice = Number(minPrice);
-        
-        const maxPrice = searchParams.get("maxPrice");
-        if (maxPrice) query.maxPrice = Number(maxPrice);
-        
+        if(category) query.category = category
+    
         const sortBy = searchParams.get("sortBy");
-        if (sortBy) query.sortBy = sortBy;
+        if (sortBy === "price" || sortBy === "createdAt") query.sortBy = sortBy;
         
         const order = searchParams.get("order");
-        if (order) query.order = order;
+        if (order === "asc" || order === "desc") query.order = order;
         
         const page = searchParams.get("page");
         if (page) query.page = Number(page);
@@ -43,18 +38,19 @@ export async function GET(req: NextRequest) {
         )
     }
 }
-
+/*Dung searchParam để phân tích url thành các giá trị cho vào query
+=> truyền query vào service( PagiantionProduct) để xử lý => có meta + data => API trả json về frontend*/ 
+/*Tao patial query để định dạng đúng kiểu type sẽ trả về service */
 export async function POST(request:NextRequest) {
     try {
         await connectDB();
-        const body = await request.json();
-
-        const {name,description,category,price, stockQuantity,imageUrl, status} = body;
-        if (!name || !category || price === undefined || stockQuantity === undefined || !imageUrl) {
+        const body: ProductType = await request.json() 
+        const {name, description,category,price, status,stockQuantity,imageUrl} = body;
+        if(!name || !category || !description || category === undefined || price === undefined || stockQuantity === undefined || !status ||!imageUrl) {
             return NextResponse.json(
-                { message: "Missing required fields" },
-                { status: 400 }
-            );
+                {message: "Missing field"},
+                {status: 400}
+            )
         }
 
         if (price < 0 || stockQuantity < 0) {
@@ -63,22 +59,15 @@ export async function POST(request:NextRequest) {
                 { status: 400 }
             );
         }
-        const urlPattern = /^(https?:\/\/[^/s$.?#].[^\s]*$)/;
+
+        const urlPattern = /^(https?:\/\/[^\s$.?#].[^\s]*$)/;
         if(!urlPattern.test(imageUrl)){
             return NextResponse.json(
                 {message: "Khong dung dinh dang link"},
-                {status: 500}
+                {status: 400}
             )
         }
-        const product = await Product.create({
-            name,
-            description,
-            category,
-            price,
-            stockQuantity,
-            imageUrl,
-            status,
-        });
+        const product = await Product.create(body);
 
         return NextResponse.json(product, {status: 201});
     } catch (error) {

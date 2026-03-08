@@ -8,3 +8,22 @@ export interface ProductType {
     imageUrl: string,
     status:  "active" | "inactive"
 }
+
+export interface ProductQuery {
+    search?: string,
+    category?: string;
+    status?: string;
+}
+
+export interface SortQuery {
+    order?: "asc" | "desc",
+    search?: string,
+    sortBy?: "price" | "createdAt";
+}
+
+export interface PaginationQuery {
+    page?: number,
+    limit?: number,
+}
+
+export interface TotalQuery extends ProductQuery, SortQuery,PaginationQuery {}
