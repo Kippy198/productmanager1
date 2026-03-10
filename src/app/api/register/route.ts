@@ -1,12 +1,13 @@
 import { NextResponse } from "next/server";
 import { connectDB } from "@/src/lib/mongodb";
-import User from '@/src/models/User';
+import { UserModel, User}  from "@/src/models/User";
 import bcrypt from "bcrypt";
 
 export async function POST(request: Request) {
   try {
     await connectDB();
-    const { name, email, password } = await request.json();
+    const body: User = await request.json();
+    const { name, email, password } = body;
     
     if (!name || !email || !password) {
       return NextResponse.json(
@@ -15,7 +16,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const existingUser = await User.findOne({ email });
+    const existingUser = await UserModel.findOne({ email });
     if (existingUser) {
       return NextResponse.json(
         { message: "Email đã được sử dụng" },
@@ -23,9 +24,9 @@ export async function POST(request: Request) {
       );
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = await bcrypt.hash("password", 10);
 
-    const newUser = new User({
+    const newUser = new UserModel({
       name,
       email,
       password: hashedPassword,

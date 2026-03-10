@@ -2,20 +2,21 @@ import { NextResponse, NextRequest } from "next/server";
 import { connectDB } from "@/src/lib/mongodb";
 import Product from "@/src/models/Product";
 import { Types } from "mongoose";
+import { ProductType } from "@/src/type/product";
 
 export async function GET(
   req: NextRequest,
-  context: { params: Promise<{ id: string }> }
+  context: { params: Promise<{id: string}> }
 ) {
   try {
     await connectDB();
-    const { id: productId } = await context.params;
+    const {id: productId} = await context.params;
 
-    if (!Types.ObjectId.isValid(productId)) {
+    if(!Types.ObjectId.isValid(productId)) {
       return NextResponse.json(
-        { message: "ID không hợp lệ" },
-        { status: 400 }
-      );
+        {message: "Id InValid"},
+        {status: 400}
+      )
     }
 
     const product = await Product.findById(productId);
@@ -40,8 +41,8 @@ export async function GET(
 }
 
 export async function PUT(
-  req: NextRequest,
-   context: { params: Promise<{ id: string }> }
+    req: NextRequest,
+    context: { params: Promise<{ id: string }> }
 ) {
   try {
     await connectDB();
@@ -54,10 +55,10 @@ export async function PUT(
       );
     }
 
-    const body = await req.json();
+    const body: ProductType = await req.json();
     const { name, description, category, price, stockQuantity, imageUrl, status } = body;
 
-    if (!name || !category || price === undefined || stockQuantity === undefined || !imageUrl) {
+    if (!name || !category || price === undefined || stockQuantity === undefined || !imageUrl || !status) {
       return NextResponse.json(
         { message: "Thiếu các trường bắt buộc" },
         { status: 400 }
@@ -81,16 +82,10 @@ export async function PUT(
 
     const product = await Product.findByIdAndUpdate(
       id,
-      {
-        name,
-        description,
-        category,
-        price,
-        stockQuantity,
-        imageUrl,
-        status,
-      },
-      { new: true }
+      body,
+      { new: true ,
+        runValidators: true,
+      }
     );
 
     if (!product) {
@@ -114,21 +109,21 @@ export async function PUT(
 }
 
 export async function DELETE(
-  req: NextRequest,
-   context: { params: Promise<{ id: string }> }
+    req: NextRequest,
+    context: { params: Promise<{ id: string }> }
 ) {
   try {
     await connectDB();
-    const { id } = await context.params;
+    const { id: productId } = await context.params;
 
-    if (!Types.ObjectId.isValid(id)) {
+    if (!Types.ObjectId.isValid(productId)) {
       return NextResponse.json(
         { message: "ID không hợp lệ" },
         { status: 400 }
       );
     }
 
-    const product = await Product.findByIdAndDelete(id);
+    const product = await Product.findByIdAndDelete(productId);
 
     if (!product) {
       return NextResponse.json(

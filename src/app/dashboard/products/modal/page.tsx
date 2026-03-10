@@ -108,7 +108,7 @@ export default function CreatModal() {
                                         message: "Description must be less than 1000 characters"
                                     }
                                 })}
-                                className={`${getInputClass(!!errors.description)} resize-none`}
+                                className={`${getInputClass(!!errors.description)} resize-none text-black` }
                                 rows={4}
                             ></textarea>
                             {errors.description && <p className="text-red-600 text-sm mt-1 font-medium">{errors.description.message}</p>}
@@ -125,7 +125,7 @@ export default function CreatModal() {
                                     {...register("category", {
                                         required: "Please select a category"
                                     })} 
-                                    className={getInputClass(!!errors.category)}
+                                    className={`${getInputClass(!!errors.category)} resize-none text-black`}
                                 >
                                     <option value="">Select a category</option>
                                     <option value="T-Shirt">T-Shirt</option>
@@ -202,7 +202,7 @@ export default function CreatModal() {
                         </div>
 
                         {/* Status */}
-                        <div>
+                        <div className="text-black">
                             <label className="block text-sm font-medium text-gray-700 mb-2">Status</label>
                             <select 
                                 {...register("status")}

@@ -6,18 +6,16 @@ export async function login(data: LoginType): Promise<UserType> {
   const res = await fetch("/api/login", {
     method: "POST",
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": "application/json"
     },
     credentials: "include",
     body: JSON.stringify(data),
-  });
+  })  
   const result: ApiResponse<UserType> = await res.json();
-
-  if (!res.ok) {
+  if(!res.ok) {
     throw new Error(result.message || "Đăng nhập thất bại");
-  }
-
-  return result.data;
+  } 
+  return result.data
 }
 
 export async function logout(): Promise<void> {

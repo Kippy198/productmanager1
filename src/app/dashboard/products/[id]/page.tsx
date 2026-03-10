@@ -266,7 +266,7 @@ export default function ProductDetailPage() {
                           setEditForm(editForm ? { ...editForm, description: e.target.value } : null)
                         }
                         rows={4}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full px-4 py-2 text-black border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       />
                     </div>
 
@@ -288,7 +288,7 @@ export default function ProductDetailPage() {
                             )
                           }
                           aria-label="Chọn danh mục sản phẩm"
-                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white"
+                          className="w-full px-4 py-2 text-black  border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white"
                         >
                           <option value="T-Shirt">T-Shirt</option>
                           <option value="Mug">Mug</option>
@@ -341,7 +341,7 @@ export default function ProductDetailPage() {
                             )
                           }
                           aria-label="Chọn trạng thái sản phẩm"
-                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white"
+                          className="w-full px-4 py-2 text-black border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white"
                         >
                           <option value="active">Hoạt động</option>
                           <option value="inactive">Không hoạt động</option>

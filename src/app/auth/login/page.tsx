@@ -10,13 +10,15 @@ import FormInput from "@/src/component/ui/input";
 export default function LoginPage() {
     const router = useRouter()
     const { success, error: errorToast } = useToast();
+    
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
+    
     const [fieldErrors, setFieldErrors] = useState<{ email?: string; password?: string }>({});
 
     const validateForm = () => {
-        const errors: { email?: string; password?: string } = {};
+        const errors: {email?: string, password?: string} = {};
         
         if (!email.trim()) {
             errors.email = "Email is required";
@@ -37,15 +39,13 @@ export default function LoginPage() {
     const handleSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
         e.preventDefault();
         
-        if (!validateForm()) {
-            return;
-        }
+        if(!validateForm) return;
 
         setLoading(true);
 
         try {
-            await login({ email, password });
-            success("Login successful!");
+            await login({email,password});
+            success("Login successful");
             router.push("/dashboard/dashboard");
             router.refresh();
         } catch (err: any) {
@@ -87,8 +87,8 @@ export default function LoginPage() {
                             value={password}
                             placeholder="Nhập mật khẩu của bạn"
                             onChange={(e) => {
-                                setPassword(e.target.value);
-                                if (fieldErrors.password) setFieldErrors({ ...fieldErrors, password: undefined });
+                                setPassword(e.target.value) 
+                                setFieldErrors({...fieldErrors, password: undefined})
                             }}
                             error= {fieldErrors.password }
                         />
@@ -100,7 +100,7 @@ export default function LoginPage() {
                             variable="primary"
                             fullWidth
                         >
-                            {loading ? (
+                            {loading ?(
                                 <span className="flex items-center justify-center gap-2">
                                     <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                         <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>

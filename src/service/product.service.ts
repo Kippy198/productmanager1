@@ -26,7 +26,7 @@ export function Filter(query: ProductQuery) {
 
 export function Sort(query: SortQuery): SortType {
     const {order = "asc",search,sortBy} = query;/* neu ko co order thi default la asc*/
-    const sortOrder = order === "desc" ? -1 : 1 ;
+    const sortOrder = order === "asc" ? 1 : -1 ;
     const sort: SortType = {};
     if(search && search.trim().length > 0){
         sort.score = {$meta: "textScore"};
@@ -34,7 +34,7 @@ export function Sort(query: SortQuery): SortType {
     if(sortBy) {
         sort[sortBy] = sortOrder/*sort[price] = sortBy => {price : -1} => tang dan*/
     }
-    sort.createdAt = -1;
+    sort.createdAt = 1;
     return sort
 
 }
@@ -54,6 +54,7 @@ export async function PaginationProduct(query: Partial<TotalQuery>) /* nhận qu
                 ? {score : {$meta: "textScore"}}
                 : {}
     let queryBuilder = Product.find(filter, projection).sort(sort);
+    
     if(limitPage > 0) {
         queryBuilder = queryBuilder.skip(skip).limit(limitPage)
     }                   
