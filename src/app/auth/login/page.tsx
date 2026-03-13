@@ -6,7 +6,6 @@ import { login } from "@/src/lib/auth";
 import { useToast } from "@/src/lib/useToast";
 import Button from "@/src/component/ui/button";
 import FormInput from "@/src/component/ui/input";
-
 export default function LoginPage() {
     const router = useRouter()
     const { success, error: errorToast } = useToast();

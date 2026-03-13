@@ -1,11 +1,11 @@
 import { NextResponse } from "next/server";
 
 export async function POST() {
-    const res = NextResponse.json({message: "Logout thanh cong"});
+    const res =  NextResponse.json({message: "Dang xuat thanh cong"});
     res.cookies.set("token","", {
-        httpOnly: true,
+        httpOnly:true,
         expires: new Date(0),
-        path: "/",
+        path: "/"
     });
     return res;
 }

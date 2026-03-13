@@ -12,7 +12,7 @@ export default function Card({title, value}: StatCard){
             {/* Content */}
             <div className="relative z-10">
                 <p className="text-gray-500 text-sm font-semibold tracking-widest uppercase mb-3 group-hover:text-gray-700 transition-colors">{title}</p>
-                <p className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">{value.toLocaleString && value.toLocaleString() || value}</p>
+                <p className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">{value.toLocaleString()}</p>
             </div>
             
             {/* Bottom accent line */}

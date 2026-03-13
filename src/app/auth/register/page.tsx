@@ -9,13 +9,13 @@ import FormInput from "@/src/component/ui/input";
 
 export default function RegisterPage() {
     const router = useRouter();
-    const { success, error: errorToast } = useToast();
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
     const [fieldErrors, setFieldErrors] = useState<{ name?: string; email?: string; password?: string }>({});
-
+    const toast = useToast();
+    
     const validateForm = () => {
         const errors: { name?: string; email?: string; password?: string } = {};
         
@@ -55,14 +55,16 @@ export default function RegisterPage() {
         setLoading(true);
 
         try {
+            toast.loading("Registing");
+
             await register({ name, email, password });
-            success("Registration successful! Redirecting to login...");
+            toast.success("Registration successful! Redirecting to login...");
             setTimeout(() => {
                 router.push("/auth/login");
                 router.refresh();
             }, 1000);
         } catch (err: any) {
-            errorToast(err.message || "Registration failed. Please try again.");
+            toast.error(err.message || "Registration failed. Please try again.");
         }
         finally {
             setLoading(false);

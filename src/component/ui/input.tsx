@@ -48,23 +48,27 @@ const FormInput = React.forwardRef<HTMLInputElement, FormInputProps>(
         <input
           ref={ref}
           disabled={disabled}
-          className={`${baseInputStyles} ${
-            error ? errorStyle : normalStyle
-          } ${disableStyles} ${className}`}
+          className={`
+            ${baseInputStyles} 
+            ${ error ? errorStyle : normalStyle} 
+            ${disableStyles} 
+            ${className}
+          `
+        }
           {...props}
         />
 
-        {error ? (
-          <p className="text-red-600 text-sm mt-1 font-medium">
-            {error}
-          </p>
-        ) : (
-          helperText && (
-            <p className="text-xs text-gray-500 mt-1">
-              {helperText}
-            </p>
+        {
+          error ? (
+            <p className="text-red-600 text-sm mt-1 font-medium">{error}</p>
+          ) : (
+            helperText && (
+              <p className="text-xs text-gray-500 mt-1">
+                {helperText}
+              </p>
+            )
           )
-        )}
+        }
       </div>
     );
   }

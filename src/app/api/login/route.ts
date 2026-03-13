@@ -3,11 +3,10 @@ import { NextResponse } from "next/server";
 import { connectDB } from "@/src/lib/mongodb";
 import bcrypt from "bcrypt";
 import  jwt  from "jsonwebtoken";
-
 export async function POST( request: Request) {
   try {
     await connectDB();
-    const body:User = await request.json();
+    const body: User = await request.json();
     const { email, password } = body;
     
     if( !email || !password) 

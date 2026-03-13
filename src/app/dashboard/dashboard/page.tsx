@@ -18,18 +18,13 @@ export default function Dashboard() {
     const [data, setData] = useState<DashBoardData | null>(null);
     const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        fetch("/api/dashboard")
-            .then((res) => res.json())
-            .then(data => {
-                setData(data);
-                setLoading(false);
-            })
-            .catch(err => {
-                console.error("Failed to fetch dashboard data:", err);
-                setLoading(false);
-            });
-    }, []); 
+    const fetchDashBoard = async () => {
+        const res = await fetch("/api/dashboard");
+        const data = await res.json();
+        setData(data);
+        setLoading(false)
+    }
+    useEffect(() => {fetchDashBoard()},[]);
 
     if (loading) return (
         <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center">
@@ -97,7 +92,7 @@ export default function Dashboard() {
                                             border: '1px solid #e5e7eb',
                                             borderRadius: '8px'
                                         }}
-                                        formatter={(value) => [`${value} products`, 'Count']}
+                                        formatter={(value) => [`${value} products`,`Count`]}
                                     />
                                     <Bar 
                                         dataKey="count" 
